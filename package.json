@@ -1,0 +1,23 @@
+{
+  "name": "proiect_tw",
+  "version": "1.0.0",
+  "description": "Site interactiv cu jocuri",
+  "main": "node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Verdes-C/Proiect-Tw-Anul2.git"
+  },
+  "author": "Verdes Constantin-Adrian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Verdes-C/Proiect-Tw-Anul2/issues"
+  },
+  "homepage": "https://github.com/Verdes-C/Proiect-Tw-Anul2#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "fs": "^0.0.1-security"
+  }
+}
