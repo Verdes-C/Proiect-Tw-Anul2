@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title><%= data.titlu %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="flip_a_card.css"
+    />
+    <script src="main.js" defer></script>
+    <script src="flip_a_card.js" defer></script>
+  </head>
+  <body>
+    <header><%- include('partial/header') %></header>
+    <nav><%- include('partial/nav') %></nav>
+    <main>
+      <div id="container"></div>
+    </main>
+    <footer><%- include('partial/footer') %></footer>
+  </body>
+</html>

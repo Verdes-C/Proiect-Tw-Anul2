@@ -9,7 +9,6 @@ const userGuessQS = document.querySelector('.userGuess input');
 const comparisonQS = document.querySelector('.comparison');
 const surpriseQS = document.querySelector('.surprise');
 const bodyQS = document.querySelector('body');
-const highscore = document.querySelector('.number');
 const winGif = document.createElement('img');
 const restart = document.querySelector('.restart');
 winGif.src = 'dance.gif';
@@ -27,20 +26,20 @@ const tryAgain = [
   'Time is running out!',
   'kekw',
 ];
+const block = document.createElement('div');
+block.classList.add('block');
 function start() {
   if (startGame) {
     if (timeRemaining >= 0) {
       time.textContent = `${timeRemaining--}`;
     } else {
       clearInterval(intervalID);
-      console.log('yes');
       startGame = 0;
       bodyQS.style.backgroundColor = 'red';
       document.querySelector('header h1').textContent = 'You Lost!!';
-
       // block player
+      checkButtonQS.remove();
     }
-  } else {
   }
 }
 
@@ -55,7 +54,7 @@ beginButtonQS.addEventListener('click', () => {
 checkButtonQS.addEventListener('click', () => {
   if (Number(userGuessQS.value) === number) {
     clearInterval(intervalID);
-    highscore.textContent = timeRemaining;
+    time.textContent = timeRemaining;
     surpriseQS.textContent = number;
     indicatorQS.textContent = '✅';
     comparisonQS.textContent = '=';
@@ -82,7 +81,7 @@ restart.addEventListener('click', () => {
   timeRemaining = 90;
   clearInterval(intervalID);
   beginQS.textContent = `Let's start. Input the range`;
-  highscore.textContent = '?';
+  time.textContent = '?';
   comparisonQS.textContent = '';
   userGuessQS.value = '';
   rangeQS.value = '';

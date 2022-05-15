@@ -7,12 +7,15 @@ const ejs = require('ejs');
 // const { time } = require('console');
 
 const app = express();
-app.use(express.static(`${__dirname}/static`));
+// app.use(express.static(`${__dirname}/static`));
 app.use(express.static(`${__dirname}/static/error`));
 app.use(express.static(`${__dirname}/static/css`));
 app.use(express.static(`${__dirname}/static/js`));
 app.use(express.static(`${__dirname}/static/img`));
 app.set('view engine', 'ejs');
+
+// let json2 = JSON.parse(fs.readFileSync(`${__dirname}/json/cards.json`));
+// console.log(Array(json2));
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -39,6 +42,28 @@ app.get('/guess-the-number', urlencodedParser, (req, res) => {
       message: 'Death!💀',
       gameTitle: 'Guess',
       gameTip: 'Try to see if you can guess the number',
+      highscore: '',
+    },
+    nav_list: {
+      keys: Object.keys(nav_list),
+      values: Object.values(nav_list),
+    },
+    footer_list: {
+      keys: Object.keys(footer_list),
+      values: Object.values(footer_list),
+    },
+  });
+});
+
+app.get('/flip-a-card', urlencodedParser, (req, res) => {
+  res.render('flip_a_card', {
+    data: {
+      titlu: 'Flip a card',
+    },
+    header: {
+      message: 'Death!💀',
+      gameTitle: 'Flip',
+      gameTip: 'Flip the cards and find what lies beneath.',
       highscore: '',
     },
     nav_list: {
