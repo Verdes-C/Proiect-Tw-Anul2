@@ -73,19 +73,56 @@ h1 {
 nav {
   font-size: 3rem;
   position: fixed;
-  top: 30vh;
+  top: 27vh;
   left: 2vh;
+  z-index: 20;
 }
-nav > ul {
+nav > ul.menu {
   display: inline-block;
   width: fit-content;
-  padding: 0.5vh 1.5vw;
-  border-radius: 100vh;
+  padding: 0.5vh 2vw;
+  border-radius: 5vh;
   background-color: white;
-  color: crimson;
+  color: black;
   align-content: center;
+  text-align: center;
 }
 
 .submenu {
-  font-size: 3rem;
+  font-size: 2rem;
+  text-align: left;
+  padding: 1vh 1vw;
+  display: none;
+  position: relative;
+}
+
+.submenu li a {
+  padding: 0.5vh 0;
+  text-decoration: none;
+  color: crimson;
+}
+
+ul.menu:hover .submenu {
+  display: block;
+}
+
+/* main */
+main {
+  z-index: 1;
+  position: relative;
+  top: 10vh;
+  left: 5vw;
+  border: 7px solid white;
+  height: 50vh;
+  width: 90vw;
+}
+
+/* footer */
+footer {
+  position: absolute;
+  display: block;
+  bottom: 0vh;
+  border-top: 7px solid white;
+  height: 7vh;
+  width: 100vw;
 }
