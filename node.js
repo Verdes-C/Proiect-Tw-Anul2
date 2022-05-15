@@ -11,6 +11,7 @@ app.use(express.static(`${__dirname}/static`));
 app.use(express.static(`${__dirname}/static/error`));
 app.use(express.static(`${__dirname}/static/css`));
 app.use(express.static(`${__dirname}/static/js`));
+app.use(express.static(`${__dirname}/static/img`));
 app.set('view engine', 'ejs');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -21,7 +22,12 @@ let footer_list = JSON.parse(
 );
 
 app.get('/', (req, res) => {
-  res.sendFile(`${__dirname}/index.html`);
+  res.render('home', {
+    nav_list: {
+      keys: Object.keys(nav_list),
+      values: Object.values(nav_list),
+    },
+  });
 });
 
 app.get('/game', (req, res) => {
@@ -68,7 +74,7 @@ app.post('/contact', urlencodedParser, (req, res) => {
   let formBody = req.body;
   formBody.data = Date();
   fs.appendFileSync(
-    `${__dirname}/contact/submitted.json`,
+    `${__dirname}/json/contact_submitted.json`,
     `${JSON.stringify(formBody)} \n`
   );
   res.render('contact_submitted', {

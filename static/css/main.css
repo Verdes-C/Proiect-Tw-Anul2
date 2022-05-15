@@ -136,6 +136,15 @@ form textarea {
   padding: 1vh 1vw;
   max-height: 20vh;
 }
+
+/* main img (contact submitted) */
+
+main img {
+  display: block;
+  height: 50vh;
+  margin: 0 auto;
+}
+
 /* footer */
 footer {
   padding: 0.5vh 1vw;
