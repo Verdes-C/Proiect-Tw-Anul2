@@ -2,32 +2,15 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Home</title>
+    <title><%= data.titlu %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
   </head>
   <body>
-    <header>
-      <h1>Game name!</h1>
-      <p class="tip">Quick tip</p>
-      <button class="restart">Death!💀</button>
-      <div class="number">Int</div>
-    </header>
-    <nav>
-      <ul class="menu">
-        <li>&#8801;</li>
-        <li>
-          <ul class="submenu">
-            <li><a href="">Home</a></li>
-            <li><a href="">Guess the Number</a></li>
-            <li><a href="">Flip a card</a></li>
-            <li><a href="">Travel the maze</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
+    <header><%- include('partial/header') %></header>
+    <nav><%- include('partial/nav') %></nav>
     <main></main>
-    <footer></footer>
+    <footer><%- include('partial/footer') %></footer>
   </body>
 </html>
