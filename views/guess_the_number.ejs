@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title><%= data.titlu %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="guess_the_number.css"
+    />
+    <script src="main.js" defer></script>
+    <script src="guess_the_number.js" defer></script>
+  </head>
+  <body>
+    <header><%- include('partial/header') %></header>
+    <nav><%- include('partial/nav') %></nav>
+    <main>
+      <div class="container">
+        <h2 class="begin">Let's start. Input the range</h2>
+        <input type="number" />
+        <button class="beginButton">Start</button>
+        <button class="checkButton">Check</button>
+        <div class="indicator"></div>
+        <p class="userGuess">Number <input type="number" /> is</p>
+        <div class="comparison"></div>
+        <div class="surprise">?</div>
+      </div>
+    </main>
+    <footer><%- include('partial/footer') %></footer>
+  </body>
+</html>

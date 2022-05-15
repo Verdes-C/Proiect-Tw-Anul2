@@ -4,7 +4,7 @@ const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
-const { time } = require('console');
+// const { time } = require('console');
 
 const app = express();
 app.use(express.static(`${__dirname}/static`));
@@ -21,7 +21,7 @@ let footer_list = JSON.parse(
   fs.readFileSync(`${__dirname}/json/footer_list.json`)
 );
 
-app.get('/', (req, res) => {
+app.get('/?', (req, res) => {
   res.render('home', {
     nav_list: {
       keys: Object.keys(nav_list),
@@ -30,26 +30,29 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get('/game', (req, res) => {
-  res.render('game', {
-    data: {
-      titlu: '',
-    },
-    header: {
-      message: 'Death!💀',
-      gameTitle: '',
-      gameTip: '',
-      highscore: '',
-    },
-    nav_list: {
-      keys: Object.keys(nav_list),
-      values: Object.values(nav_list),
-    },
-    footer_list: {
-      keys: Object.keys(footer_list),
-      values: Object.values(footer_list),
-    },
-  });
+app.get('/game:id', urlencodedParser, (req, res) => {
+  console.log(req.params);
+  if (req.params.id === ':1') {
+    res.render('guess_the_number', {
+      data: {
+        titlu: 'Guess the Number',
+      },
+      header: {
+        message: 'Death!💀',
+        gameTitle: 'Guess',
+        gameTip: 'Try to see if you can guess the number',
+        highscore: '',
+      },
+      nav_list: {
+        keys: Object.keys(nav_list),
+        values: Object.values(nav_list),
+      },
+      footer_list: {
+        keys: Object.keys(footer_list),
+        values: Object.values(footer_list),
+      },
+    });
+  }
 });
 
 app.get('/contact', (req, res) => {
@@ -71,6 +74,7 @@ app.get('/contact', (req, res) => {
   });
 });
 app.post('/contact', urlencodedParser, (req, res) => {
+  console.log(req.params);
   let formBody = req.body;
   formBody.data = Date();
   fs.appendFileSync(
@@ -95,7 +99,7 @@ app.post('/contact', urlencodedParser, (req, res) => {
   });
 });
 //routing to 404
-app.all('*', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(`${__dirname}/static/error/404.html`);
 });
 

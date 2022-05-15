@@ -1,0 +1,86 @@
+.container {
+  display: block;
+  margin: 0;
+  width: 100%;
+  height: 45vh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'up up up upR upR'
+    '. . mid midR midR'
+    'downL downL downM downR downR ';
+}
+
+h2 {
+  font-size: 1.9rem;
+}
+
+.begin {
+  grid-area: up;
+  text-align: left;
+}
+
+.container input {
+  grid-area: upR;
+  width: 10vw;
+  height: 10vh;
+  font-size: 2em;
+}
+
+.beginButton {
+  grid-area: midR;
+  height: 10vh;
+  width: 10vw;
+}
+
+.checkButton {
+  display: none;
+  grid-area: midR;
+  height: 10vh;
+  width: 10vw;
+}
+
+.indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: mid;
+  background-color: white;
+  width: fit-content;
+  min-width: 10vw;
+  height: 10vh;
+  color: #333;
+  font-size: 5rem;
+}
+
+.userGuess {
+  grid-area: downL;
+  width: fit-content;
+  height: 10vh;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.userGuess input {
+  width: 10vw;
+  height: 10vh;
+}
+
+.comparison {
+  grid-area: downM;
+  font-size: 2.5rem;
+}
+
+.surprise {
+  grid-area: downR;
+  background-color: white;
+  color: #333;
+  width: 10vw;
+  height: 10vh;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
