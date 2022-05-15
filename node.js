@@ -30,29 +30,26 @@ app.get('/?', (req, res) => {
   });
 });
 
-app.get('/game:id', urlencodedParser, (req, res) => {
-  console.log(req.params);
-  if (req.params.id === ':1') {
-    res.render('guess_the_number', {
-      data: {
-        titlu: 'Guess the Number',
-      },
-      header: {
-        message: 'Death!💀',
-        gameTitle: 'Guess',
-        gameTip: 'Try to see if you can guess the number',
-        highscore: '',
-      },
-      nav_list: {
-        keys: Object.keys(nav_list),
-        values: Object.values(nav_list),
-      },
-      footer_list: {
-        keys: Object.keys(footer_list),
-        values: Object.values(footer_list),
-      },
-    });
-  }
+app.get('/guess-the-number', urlencodedParser, (req, res) => {
+  res.render('guess_the_number', {
+    data: {
+      titlu: 'Guess the Number',
+    },
+    header: {
+      message: 'Death!💀',
+      gameTitle: 'Guess',
+      gameTip: 'Try to see if you can guess the number',
+      highscore: '',
+    },
+    nav_list: {
+      keys: Object.keys(nav_list),
+      values: Object.values(nav_list),
+    },
+    footer_list: {
+      keys: Object.keys(footer_list),
+      values: Object.values(footer_list),
+    },
+  });
 });
 
 app.get('/contact', (req, res) => {

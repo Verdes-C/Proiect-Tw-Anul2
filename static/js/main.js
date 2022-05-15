@@ -1,6 +1,6 @@
 'use strict';
 const navi = document.querySelectorAll('.submenu li a');
 navi[0].href = '/';
-for (let i = 1; i < navi.length; i++) {
-  navi[i].href = `/game:${i}`;
-}
+navi[1].href = '/guess-the-number';
+navi[2].href = '/flip-a-card';
+navi[3].href = '/travel-the-maze';

@@ -14,10 +14,6 @@
     'downL downL downM downR downR ';
 }
 
-h2 {
-  font-size: 1.9rem;
-}
-
 .begin {
   grid-area: up;
   text-align: left;
@@ -27,7 +23,7 @@ h2 {
   grid-area: upR;
   width: 10vw;
   height: 10vh;
-  font-size: 2em;
+  font-size: 5vh;
 }
 
 .beginButton {
