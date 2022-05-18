@@ -17,7 +17,8 @@ let startGame = 1;
 let timeRemaining = 90;
 let intervalID;
 let number;
-localStorage.setItem('guess_the_number', '0');
+localStorage.setItem('guess_the_number', '0'); // ??
+localStorage.getItem('guess_the_number'); //??
 const tryAgain = [
   'Try again!',
   'Nup!',

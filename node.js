@@ -5,15 +5,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const session = require('express-session');
-
+const formidable = require('formidable');
 const app = express();
-// app.use(express.static(`${__dirname}/static`));
 app.use(express.static(`${__dirname}/static/error`));
 app.use(express.static(`${__dirname}/static/css`));
 app.use(express.static(`${__dirname}/static/js`));
 app.use(express.static(`${__dirname}/static/img`));
 app.set('view engine', 'ejs');
-app.use(session({ secret: 'abcdefg', resave: true, saveUninitialized: true }));
+app.use(session({ secret: 'abcdefg', resave: true, saveUninitialized: false }));
 
 // let json2 = JSON.parse(fs.readFileSync(`${__dirname}/json/cards.json`));
 // console.log(Array(json2));
@@ -43,8 +42,21 @@ app.get('/account', (req, res) => {
   });
 });
 
-app.post('/account', urlencodedParser, (req, res) => {
-  console.log(req.params, req.session, req.body);
+app.post('/account', (req, res) => {
+  const formUpload = `${__dirname}/uploads`;
+  const form = formidable({ uploadDir: formUpload });
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    const oldPath = files.uploadedFile.filepath;
+    const newPath = `${formUpload}/${files.uploadedFile.originalFilename}`;
+    fs.rename(oldPath, newPath, () => {
+      console.log('i did it maa');
+    });
+    console.log(files.uploadedFile.originalFilename);
+  });
 });
 
 app.get('/guess-the-number', (req, res) => {
@@ -109,14 +121,23 @@ app.get('/contact', (req, res) => {
     },
   });
 });
-app.post('/contact', urlencodedParser, (req, res) => {
-  console.log(req.params);
-  let formBody = req.body;
-  formBody.data = Date();
-  fs.appendFileSync(
-    `${__dirname}/json/contact_submitted.json`,
-    `${JSON.stringify(formBody)} \n`
-  );
+app.post('/contact', (req, res) => {
+  const formUpload = `${__dirname}/json`;
+  const form = formidable();
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    let file = JSON.parse(
+      fs.readFileSync(`${formUpload}/contact_submitted.json`, 'utf-8')
+    );
+    file[Object.keys(file).length + 1] = fields;
+    fs.writeFileSync(
+      `${formUpload}/contact_submitted.json`,
+      JSON.stringify(file)
+    );
+  });
   res.render('contact_submitted', {
     header: {
       message: 'Write us how we can help you in the field below',

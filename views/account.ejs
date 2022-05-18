@@ -12,14 +12,16 @@
   <body>
     <nav><%- include('partial/nav') %></nav>
     <main>
-      <form action="/account" method="post">
+      <form action="/account" method="post" enctype="multipart/form-data"=>
         <label
           >Username: <input type="text" name="username" value="username1"
         /></label>
         <label
           >Parola: <input type="password" name="parola" value="test1"
         /></label>
-        <input type="submit" value="Submit" />
+        <input type="file" name="uploadedFile"/>
+        <input type="submit" value="Login" />
+        <input type="submit" value="Register" />
       </form>
     </main>
   </body>
