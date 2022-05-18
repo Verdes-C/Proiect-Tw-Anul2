@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="account.css" />
+    <!-- <script src="account.js" defer></script> -->
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <nav><%- include('partial/nav') %></nav>
+    <main>
+      <form action="/account" method="post">
+        <label
+          >Username: <input type="text" name="username" value="username1"
+        /></label>
+        <label
+          >Parola: <input type="password" name="parola" value="test1"
+        /></label>
+        <input type="submit" value="Submit" />
+      </form>
+    </main>
+  </body>
+</html>

@@ -4,7 +4,7 @@ const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
-// const { time } = require('console');
+const session = require('express-session');
 
 const app = express();
 // app.use(express.static(`${__dirname}/static`));
@@ -13,6 +13,7 @@ app.use(express.static(`${__dirname}/static/css`));
 app.use(express.static(`${__dirname}/static/js`));
 app.use(express.static(`${__dirname}/static/img`));
 app.set('view engine', 'ejs');
+app.use(session({ secret: 'abcdefg', resave: true, saveUninitialized: true }));
 
 // let json2 = JSON.parse(fs.readFileSync(`${__dirname}/json/cards.json`));
 // console.log(Array(json2));
@@ -33,7 +34,20 @@ app.get('/?', (req, res) => {
   });
 });
 
-app.get('/guess-the-number', urlencodedParser, (req, res) => {
+app.get('/account', (req, res) => {
+  res.render('account', {
+    nav_list: {
+      keys: Object.keys(nav_list),
+      values: Object.values(nav_list),
+    },
+  });
+});
+
+app.post('/account', urlencodedParser, (req, res) => {
+  console.log(req.params, req.session, req.body);
+});
+
+app.get('/guess-the-number', (req, res) => {
   res.render('guess_the_number', {
     data: {
       titlu: 'Guess the Number',
@@ -55,7 +69,7 @@ app.get('/guess-the-number', urlencodedParser, (req, res) => {
   });
 });
 
-app.get('/flip-a-card', urlencodedParser, (req, res) => {
+app.get('/flip-a-card', (req, res) => {
   res.render('flip_a_card', {
     data: {
       titlu: 'Flip a card',
