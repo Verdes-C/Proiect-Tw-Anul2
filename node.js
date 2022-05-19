@@ -14,8 +14,7 @@ app.use(express.static(`${__dirname}/static/img`));
 app.set('view engine', 'ejs');
 app.use(session({ secret: 'abcdefg', resave: true, saveUninitialized: false }));
 
-// let json2 = JSON.parse(fs.readFileSync(`${__dirname}/json/cards.json`));
-// console.log(Array(json2));
+// let json2 = JSON.parse(fs.readFileSyc(`${__dirname}/json/cards.json`));
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 let nav_list = JSON.parse(fs.readFileSync(`${__dirname}/json/nav_list.json`));
@@ -38,6 +37,7 @@ app.get('/account', (req, res) => {
       keys: Object.keys(nav_list),
       values: Object.values(nav_list),
     },
+    message: '',
   });
 });
 
@@ -49,12 +49,75 @@ app.post('/account', (req, res) => {
       next(err);
       return;
     }
-    const oldPath = files.uploadedFile.filepath;
-    const newPath = `${formUpload}/${files.uploadedFile.originalFilename}`;
-    fs.rename(oldPath, newPath, () => {
-      console.log('i did it maa');
+    fs.unlink(files.profileImage.filepath, () => {
+      console.log('empty file removed');
     });
-    console.log(files.uploadedFile.originalFilename);
+    let accList = JSON.parse(
+      fs.readFileSync(`${__dirname}/json/accounts.json`, 'utf-8')
+    );
+
+    for (let i = 1; i <= Object.keys(accList).length; i++) {
+      if (
+        accList[i].username === fields.username &&
+        accList[i].password === fields.password
+      ) {
+        res.render('account', {
+          nav_list: {
+            keys: Object.keys(nav_list),
+            values: Object.values(nav_list),
+          },
+          message: `<h2>Welcome back ${accList[i].username}! For the moment the website is a work in progress. You can follow this path to logout: <button onclick="location.href = '/'">Logout and go Home</button></h2>`,
+        });
+      }
+    }
+    res.render('account', {
+      nav_list: {
+        keys: Object.keys(nav_list),
+        values: Object.values(nav_list),
+      },
+      message: `<h2>The username and/or password you provided were wrong. Try again</h2>`,
+    });
+  });
+});
+
+app.post('/register', (req, res) => {
+  const formUpload = `${__dirname}/uploads`;
+  const form = formidable({ uploadDir: formUpload });
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      next(err);
+      return;
+    }
+
+    let accList = JSON.parse(
+      fs.readFileSync(`${__dirname}/json/accounts.json`, 'utf-8')
+    );
+    accList[Object.keys(accList).length + 1] = fields;
+
+    const oldPath = files.profileImage.filepath;
+    if (files.profileImage.size > 0) {
+      const newPath = `${formUpload}/${files.profileImage.originalFilename}`;
+      fs.rename(oldPath, newPath, () => {});
+
+      accList[Object.keys(accList).length].profileImage =
+        files.profileImage.originalFilename;
+    } else {
+      fs.unlink(files.profileImage.filepath, () => {
+        console.log('empty file removed');
+      });
+      accList[Object.keys(accList).length].profileImage = 'profil.jpg';
+    }
+    fs.writeFileSync(
+      `${__dirname}/json/accounts.json`,
+      JSON.stringify(accList)
+    );
+  });
+  res.render('account', {
+    nav_list: {
+      keys: Object.keys(nav_list),
+      values: Object.values(nav_list),
+    },
+    message: '<h2>Account successfully created. You can now log in.</h2>',
   });
 });
 

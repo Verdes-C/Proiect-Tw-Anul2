@@ -5,3 +5,8 @@ main {
   align-items: center;
   min-width: 770px;
 }
+
+h2 {
+  padding: 2vh 2vw;
+  text-align: center;
+}

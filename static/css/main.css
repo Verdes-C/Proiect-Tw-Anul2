@@ -136,8 +136,8 @@ main form {
   row-gap: 1vh;
 }
 
-form input,
-form textarea {
+form.contactForm input,
+form.contactForm textarea {
   text-transform: capitalize;
 }
 

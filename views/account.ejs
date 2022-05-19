@@ -6,23 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="account.css" />
-    <!-- <script src="account.js" defer></script> -->
+    <script src="account.js" defer></script>
     <script src="main.js" defer></script>
   </head>
   <body>
     <nav><%- include('partial/nav') %></nav>
     <main>
-      <form action="/account" method="post" enctype="multipart/form-data"=>
+      <form action="/account" method="post" enctype="multipart/form-data">
         <label
-          >Username: <input type="text" name="username" value="username1"
+          >Username:
+          <input type="text" name="username" value="username1" required
         /></label>
         <label
-          >Parola: <input type="password" name="parola" value="test1"
+          >Password:
+          <input type="password" name="password" value="test1" required
         /></label>
-        <input type="file" name="uploadedFile"/>
+        <label>Imagine profil: <input type="file" name="profileImage" /></label>
         <input type="submit" value="Login" />
-        <input type="submit" value="Register" />
+        <input type="submit" value="Register" formaction="/register" />
       </form>
+      <%- message %>
     </main>
   </body>
 </html>
