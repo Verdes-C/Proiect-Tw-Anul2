@@ -1,4 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+@media (max-width: 900px) {
+  body {
+    background-color: blue;
+    min-width: 800px;
+  }
+  main {
+    min-width: 800px;
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -37,7 +48,7 @@ h1 {
 
 .number {
   background: #eee;
-  color: #333;
+  color: #222;
   font-size: 5rem;
   width: 15rem;
   padding: 3rem 0rem;
@@ -165,4 +176,8 @@ footer {
 
 footer a:last-child {
   color: white;
+}
+
+.fontFamily {
+  font-size: 0.4em;
 }

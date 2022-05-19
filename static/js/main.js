@@ -5,3 +5,7 @@ navi[1].href = '/account';
 navi[2].href = '/guess-the-number';
 navi[3].href = '/flip-a-card';
 navi[4].href = '/travel-the-maze';
+
+const font = getComputedStyle(document.querySelector('body')).fontFamily;
+const fontFamilyQS = document.getElementsByClassName('fontFamily')[0];
+fontFamilyQS.textContent = font;

@@ -31,6 +31,10 @@ const arrayCards = {
   0: { src: '40px-Playing_card_club_5.svg.png', type: '5-C' },
 };
 
+if (localStorage.getItem('flip_a_card') === null) {
+  localStorage.setItem('flip_a_card', '0');
+}
+
 const container = document.getElementById('container');
 let arrayList = Object.keys(arrayCards).sort(() => Math.random() - 0.5);
 console.log(arrayList);
@@ -40,11 +44,9 @@ let test;
 function createElement(i) {
   const element = document.createElement('div');
   element.classList.add('size');
-  // element.style.backgroundImage = `url(${
-  //   arrayCards[Number(arrayList[i])].src
-  // })`;
   element.index = Number(arrayList[i]);
-  element.type = arrayCards[Number(arrayList[i])].type;
+  // element.type = arrayCards[Number(arrayList[i])].type;
+  element.type = 'test';
   element.addEventListener('click', () => {
     changeBackground(element);
   });
@@ -82,14 +84,17 @@ function changeBackground(element) {
     });
     if (shownElements[0].type === shownElements[1].type) {
       console.log('Time to remove');
-      wait(0.5).then(() => {
-        shownElements[0].remove();
-        shownElements[1].remove();
-      });
-    }
-    if (document.querySelectorAll('.size').length === 0) {
-      console.log('done');
-      winCondition();
+      wait(0.5)
+        .then(() => {
+          shownElements[0].remove();
+          shownElements[1].remove();
+        })
+        .then(() => {
+          if (document.querySelectorAll('.size').length === 0) {
+            console.log('done');
+            winCondition();
+          }
+        });
     }
   }
 }
@@ -125,9 +130,13 @@ function winCondition() {
   document.querySelector('header h1').textContent = 'You Won!!';
   bodyQS.style.backgroundColor = 'green';
   container.innerHTML = winGif.outerHTML;
+  if (Number(localStorage.getItem('flip_a_card')) < timeRemaining) {
+    localStorage.setItem('flip_a_card', `${timeRemaining}`);
+  }
 }
 
 function restartGame() {
+  startGame = 1;
   clearInterval(intervalID);
   intervalID = setInterval(start, 1000);
   timeRemaining = 600;
@@ -138,4 +147,10 @@ function restartGame() {
   createInsert(Object.keys(arrayCards).length - 1);
 }
 restart.addEventListener('click', restartGame);
+restart.addEventListener('click', restartGame);
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    restartGame();
+  }
+});
 createInsert(Object.keys(arrayCards).length - 1);

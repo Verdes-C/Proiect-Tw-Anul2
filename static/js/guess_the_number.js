@@ -17,8 +17,10 @@ let startGame = 1;
 let timeRemaining = 90;
 let intervalID;
 let number;
-localStorage.setItem('guess_the_number', '0'); // ??
-localStorage.getItem('guess_the_number'); //??
+if (localStorage.getItem('guess_the_number') === null) {
+  localStorage.setItem('guess_the_number', '0');
+}
+
 const tryAgain = [
   'Try again!',
   'Nup!',
@@ -76,7 +78,8 @@ checkButtonQS.addEventListener('click', () => {
   }
 });
 
-restart.addEventListener('click', () => {
+function gameRestart() {
+  console.log('restart');
   checkButtonQS.style.display = 'none';
   beginButtonQS.style.display = 'block';
   timeRemaining = 90;
@@ -88,7 +91,14 @@ restart.addEventListener('click', () => {
   rangeQS.value = '';
   indicatorQS.textContent = '';
   document.querySelector('header h1').textContent = 'Guess';
-  bodyQS.style.backgroundColor = '#333';
+  bodyQS.style.backgroundColor = '#222';
   beginQS.outerHTML = `<h2 class="begin">Let's start. Input the range</h2>`;
   surpriseQS.textContent = '?';
+}
+
+restart.addEventListener('click', gameRestart);
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    gameRestart();
+  }
 });

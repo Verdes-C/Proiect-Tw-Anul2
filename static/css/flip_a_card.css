@@ -18,3 +18,16 @@
   background-size: contain;
   background-size: 100% 100%;
 }
+
+@media (max-width: 900px) {
+  body {
+    background-color: blue;
+    min-width: 800px;
+  }
+  main {
+    min-width: 800px;
+  }
+  .size {
+    min-width: 48px;
+  }
+}

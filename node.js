@@ -16,7 +16,6 @@ app.use(session({ secret: 'abcdefg', resave: true, saveUninitialized: false }));
 
 // let json2 = JSON.parse(fs.readFileSync(`${__dirname}/json/cards.json`));
 // console.log(Array(json2));
-
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 let nav_list = JSON.parse(fs.readFileSync(`${__dirname}/json/nav_list.json`));
