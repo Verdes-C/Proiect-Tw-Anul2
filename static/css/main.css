@@ -1,15 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 
-@media (max-width: 900px) {
-  body {
-    background-color: blue;
-    min-width: 800px;
-  }
-  main {
-    min-width: 800px;
-  }
-}
-
 * {
   padding: 0;
   margin: 0;
@@ -180,4 +170,14 @@ footer a:last-child {
 
 .fontFamily {
   font-size: 0.4em;
+}
+
+@media (max-width: 900px) {
+  body {
+    background-color: blue;
+    min-width: 800px;
+  }
+  main {
+    min-width: 800px;
+  }
 }

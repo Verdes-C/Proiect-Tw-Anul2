@@ -92,32 +92,51 @@ app.post('/register', (req, res) => {
     let accList = JSON.parse(
       fs.readFileSync(`${__dirname}/json/accounts.json`, 'utf-8')
     );
-    accList[Object.keys(accList).length + 1] = fields;
-
-    const oldPath = files.profileImage.filepath;
-    if (files.profileImage.size > 0) {
-      const newPath = `${formUpload}/${files.profileImage.originalFilename}`;
-      fs.rename(oldPath, newPath, () => {});
-
-      accList[Object.keys(accList).length].profileImage =
-        files.profileImage.originalFilename;
-    } else {
+    let testUsername = fields.username;
+    let arrTest = [];
+    for (let i = 1; i <= Object.keys(accList).length; i++) {
+      arrTest.push(accList[i].username);
+    }
+    if (arrTest.includes(testUsername)) {
       fs.unlink(files.profileImage.filepath, () => {
         console.log('empty file removed');
       });
-      accList[Object.keys(accList).length].profileImage = 'profil.jpg';
+      res.render('account', {
+        nav_list: {
+          keys: Object.keys(nav_list),
+          values: Object.values(nav_list),
+        },
+        message: '<h2>The username has already been taken. Try again!</h2>',
+      });
+    } else {
+      accList[Object.keys(accList).length + 1] = fields;
+
+      const oldPath = files.profileImage.filepath;
+      if (files.profileImage.size > 0) {
+        const newPath = `${formUpload}/${files.profileImage.originalFilename}`;
+        fs.rename(oldPath, newPath, () => {});
+
+        accList[Object.keys(accList).length].profileImage =
+          files.profileImage.originalFilename;
+      } else {
+        fs.unlink(files.profileImage.filepath, () => {
+          console.log('empty file removed');
+        });
+        accList[Object.keys(accList).length].profileImage = 'profil.jpg';
+      }
+      fs.writeFileSync(
+        `${__dirname}/json/accounts.json`,
+        JSON.stringify(accList)
+      );
+
+      res.render('account', {
+        nav_list: {
+          keys: Object.keys(nav_list),
+          values: Object.values(nav_list),
+        },
+        message: '<h2>Account successfully created. You can now log in.</h2>',
+      });
     }
-    fs.writeFileSync(
-      `${__dirname}/json/accounts.json`,
-      JSON.stringify(accList)
-    );
-  });
-  res.render('account', {
-    nav_list: {
-      keys: Object.keys(nav_list),
-      values: Object.values(nav_list),
-    },
-    message: '<h2>Account successfully created. You can now log in.</h2>',
   });
 });
 

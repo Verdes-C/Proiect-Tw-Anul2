@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 
-@media (max-width: 900px) {
-  body,
-  main {
-    background-color: blue;
-  }
-}
-
 * {
   padding: 0;
   margin: 0;
@@ -73,4 +66,10 @@ nav > ul.menu {
 
 ul.menu:hover .submenu {
   display: block;
+}
+/* media querry */
+@media (max-width: 900px) {
+  body {
+    background-color: blue;
+  }
 }
